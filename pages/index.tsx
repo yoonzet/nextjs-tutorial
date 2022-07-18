@@ -1,16 +1,29 @@
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Seo from "../components/Seo";
 
-export default function Home({results}){
+declare module 'react' {
+  interface StyleHTMLAttributes<T> extends React.HTMLAttributes<T> {
+    jsx?: boolean;
+    global?: boolean;
+  }
+}
+interface IMovie{
+  id: number;
+  original_title: string;
+  poster_path:string;
+}
+
+export default function Home({results}:InferGetServerSidePropsType<GetServerSideProps>){
   const router = useRouter();
-  const onClick = (id, title) => {
+  const onClick = (id:number, title:string) => {
     router.push(`/movies/${title}/${id}`);
   };
   return (
     <div className="container">
       <Seo title='Home'/>
-      {results?.map(movie => (
+      {results?.map((movie:IMovie) => (
             <div onClick={()=> onClick(movie.id, movie.original_title)} className="movie"  key={movie.id}>
               <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
             <Link href={`/movies/${movie.original_title}/${movie.id}`}
