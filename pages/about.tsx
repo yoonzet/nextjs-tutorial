@@ -1,5 +1,4 @@
-import NavBar from "../ components/NavBar";
-import Seo from "../ components/Seo";
+import Seo from "../components/Seo";
 
 export default function About(){
     return(

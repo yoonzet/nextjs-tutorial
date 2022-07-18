@@ -1,3 +1,5 @@
+const API_KEY = 'f7108cb9304ec757f37227aacbe9891c';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -15,8 +17,11 @@ const nextConfig = {
     return [
       {
         source:'/api/movies',
-        destination:'',
-        permanent:false
+        destination:`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`,
+      },
+      {
+        source:'/api/movies/:id',
+        destination:`https://api.themoviedb.org/3/movie/:id?api_key=${API_KEY}`,
       }
     ]
   }
